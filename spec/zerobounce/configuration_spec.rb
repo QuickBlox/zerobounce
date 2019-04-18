@@ -3,7 +3,12 @@
 RSpec.describe Zerobounce::Configuration do
   it 'has correct attributes' do
     expect(described_class.new).to have_attributes(
-      apikey: be_nil, host: be_a(String), headers: be_a(Hash), middleware: be_a(Proc), valid_statuses: be_an(Array)
+      apikey: be_nil,
+      host: be_a(String),
+      headers: be_a(Hash),
+      middleware: be_a(Proc),
+      valid_statuses: be_an(Array),
+      valid_sub_statuses: be_an(Array)
     )
   end
 

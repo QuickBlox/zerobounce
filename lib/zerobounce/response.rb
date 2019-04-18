@@ -109,7 +109,7 @@ module Zerobounce
     #
     # @return [Boolean]
     def valid?
-      @valid ||= Zerobounce.config.valid_statuses.include?(status)
+      @valid ||= (Zerobounce.config.valid_statuses.include?(status) || Zerobounce.config.valid_sub_statuses.include?(sub_status))
     end
 
     # The opposite of {#valid?}

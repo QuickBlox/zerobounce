@@ -51,12 +51,20 @@ RSpec.describe Zerobounce::Response do
   end
 
   describe '#valid?' do
-    before { allow(response).to receive(:body).and_return(status: 'DoNotMail') }
+    before { allow(response).to receive(:body).and_return(status: 'DoNotMail', sub_status: 'RoleBased') }
 
     it 'can change what a valid email is' do
       expect { Zerobounce.config.valid_statuses = %i[do_not_mail] }.to(
         change { described_class.new(response, request).valid? }.from(false).to(true)
       )
+    end
+
+    describe 'with valid sub status' do
+      it 'can change what a valid email is' do
+        expect { Zerobounce.config.valid_sub_statuses = %i[role_based] }.to(
+          change { described_class.new(response, request).valid? }.from(false).to(true)
+        )
+      end
     end
   end
 

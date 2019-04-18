@@ -29,6 +29,10 @@ module Zerobounce
   #
   # @attr [Array<Symbol>] valid_statues
   #   The statuses that are considered valid by {Response#valid?}.
+  # @attr [Array<Symbol>] valid_statuses
+  #   The statuses that are considered valid by {Response#valid?}.
+  #
+  # @attr [Array<Symbol>] valid_sub_statuses
   class Configuration
     attr_accessor :host
     attr_accessor :headers
@@ -36,12 +40,14 @@ module Zerobounce
     attr_accessor :middleware
     attr_accessor :api_version
     attr_accessor :valid_statuses
+    attr_accessor :valid_sub_statuses
 
     def initialize
       self.host = 'https://api.zerobounce.net'
       self.apikey = ENV['ZEROBOUNCE_API_KEY']
       self.api_version = 'v2'
       self.valid_statuses = %i[valid catch_all]
+      self.valid_sub_statuses = []
       self.headers = { user_agent: "ZerobounceRubyGem/#{Zerobounce::VERSION}" }
 
       self.middleware = proc do |builder|
